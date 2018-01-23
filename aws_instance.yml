@@ -1,14 +1,13 @@
 ---
-- name: Create a sandbox instance
-  hosts: localhost
+- hosts: localhost
   connection: local
   gather_facts: false
   vars:
-    key_name: rdops 
+    key_name: yourkeyname 
     instance_type: t2.micro
-    security_group: rdops-sg
+    security_group: yoursecuritygroup
     image: ami-25250840
-    region: us-east-2
+    region: yourregion
   tasks:
     - name: Launch instance
       ec2:
@@ -44,17 +43,6 @@
         db: ldapserver
       with_items: "{{ ec2.instances }}"
 
-#    - include: install_config_ldapserver.yml
-    
-# Start stopped instances specified by tag
-#
-#   - local_action:
-#       module: ec2
-#       instance_tags:
-#         Name: ldapserver
-#     state: running
-
-#
 # Restart instances specified by tag
 #
 #   - local_action:
